@@ -1,0 +1,854 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inkfeed</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: Georgia, serif;
+        background: #fff;
+        color: #000;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 820px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      h2 {
+        font-size: 1.35em;
+        border-bottom: 2px solid #000;
+        padding-bottom: 8px;
+        margin-bottom: 20px;
+      }
+
+      /* ── Nav ─────────────────────────────────── */
+      .nav {
+        border-bottom: 1px solid #ccc;
+        padding: 12px 0;
+      }
+
+      .nav .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .nav-brand {
+        font-weight: bold;
+        font-size: 1em;
+        text-decoration: none;
+        color: #000;
+      }
+
+      /* ── Buttons ─────────────────────────────── */
+      .btn {
+        display: inline-block;
+        font-family: Georgia, serif;
+        font-size: 1em;
+        padding: 10px 22px;
+        background: #000;
+        color: #fff;
+        text-decoration: none;
+        cursor: pointer;
+        border: 2px solid #000;
+      }
+
+      .btn:hover {
+        background: #222;
+      }
+
+      .btn-outline {
+        background: #fff;
+        color: #000;
+      }
+
+      .btn-outline:hover {
+        background: #f0f0f0;
+      }
+
+      .btn-sm {
+        padding: 6px 14px;
+        font-size: 0.9em;
+      }
+
+      /* ── Hero ────────────────────────────────── */
+      .hero {
+        padding: 64px 0 56px;
+        border-bottom: 2px solid #000;
+      }
+
+      .hero-eyebrow {
+        font-size: 0.82em;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #666;
+        margin-bottom: 18px;
+      }
+
+      .hero h1 {
+        font-size: 2.6em;
+        line-height: 1.15;
+        margin-bottom: 22px;
+      }
+
+      .hero-sub {
+        font-size: 1.1em;
+        color: #444;
+        max-width: 540px;
+        margin-bottom: 36px;
+        line-height: 1.7;
+      }
+
+      .hero-actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      /* ── Mockup ──────────────────────────────── */
+      .mockup-section {
+        padding: 56px 0;
+        border-bottom: 1px solid #ccc;
+      }
+
+      .mockup-section > .container > p {
+        color: #555;
+        margin-bottom: 24px;
+      }
+
+      .mockup-tabs {
+        display: flex;
+        margin-bottom: -2px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .mockup-tab {
+        padding: 7px 16px;
+        font-family: Georgia, serif;
+        font-size: 0.85em;
+        background: #f5f5f5;
+        border: 1px solid #bbb;
+        border-bottom: 2px solid #bbb;
+        cursor: pointer;
+        color: #555;
+      }
+
+      .mockup-tab + .mockup-tab {
+        border-left: none;
+      }
+
+      .mockup-tab.active {
+        background: #fff;
+        border-color: #000;
+        border-bottom-color: #fff;
+        color: #000;
+        font-weight: bold;
+      }
+
+      .mockup-frame {
+        border: 2px solid #000;
+        background: #fff;
+        max-width: 500px;
+      }
+
+      .mockup-toolbar {
+        background: #f5f5f5;
+        border-bottom: 1px solid #000;
+        padding: 8px 12px;
+        display: flex;
+        gap: 6px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .mb {
+        /* mockup button */
+        font-family: Georgia, serif;
+        font-size: 0.78em;
+        padding: 4px 9px;
+        background: #000;
+        color: #fff;
+        border: none;
+        cursor: default;
+      }
+
+      .mb.sec {
+        background: #fff;
+        color: #000;
+        border: 1px solid #000;
+      }
+
+      .ml {
+        font-size: 0.78em;
+        font-weight: bold;
+      }
+
+      .mockup-body {
+        padding: 14px 16px;
+      }
+
+      .m-feed-title {
+        font-weight: bold;
+        font-size: 0.95em;
+        border-bottom: 2px solid #000;
+        padding-bottom: 6px;
+        margin-bottom: 12px;
+      }
+
+      .m-dl-row {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        margin-bottom: 14px;
+      }
+
+      .m-article {
+        padding: 10px 0;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .m-article:last-child {
+        border-bottom: none;
+      }
+
+      .m-title {
+        font-size: 0.9em;
+        font-weight: bold;
+        margin-bottom: 3px;
+      }
+
+      .m-meta {
+        font-size: 0.75em;
+        color: #666;
+        margin-bottom: 4px;
+      }
+
+      .m-desc {
+        font-size: 0.82em;
+        color: #444;
+        line-height: 1.4;
+      }
+
+      .m-nav {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        margin-bottom: 12px;
+      }
+
+      .m-art-title {
+        font-weight: bold;
+        font-size: 0.9em;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 8px;
+        margin-bottom: 12px;
+      }
+
+      .m-art-body {
+        font-size: 0.85em;
+        line-height: 1.65;
+        color: #222;
+      }
+
+      .m-art-body p {
+        margin-bottom: 10px;
+      }
+
+      /* ── Features ────────────────────────────── */
+      .features {
+        padding: 56px 0;
+        border-bottom: 1px solid #ccc;
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+        gap: 20px;
+      }
+
+      .feature {
+        border: 1px solid #ccc;
+        padding: 18px;
+        background: #fafafa;
+      }
+
+      .feature-glyph {
+        font-size: 1.3em;
+        margin-bottom: 10px;
+      }
+
+      .feature h3 {
+        font-size: 1em;
+        margin-bottom: 6px;
+      }
+
+      .feature p {
+        font-size: 0.88em;
+        color: #444;
+        line-height: 1.5;
+        margin: 0;
+      }
+
+      /* ── Steps ───────────────────────────────── */
+      .how-section {
+        padding: 56px 0;
+        border-bottom: 1px solid #ccc;
+      }
+
+      .steps {
+        margin-top: 24px;
+      }
+
+      .step {
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
+        margin-bottom: 28px;
+      }
+
+      .step:last-child {
+        margin-bottom: 0;
+      }
+
+      .step-num {
+        font-size: 2em;
+        font-weight: bold;
+        line-height: 1;
+        min-width: 28px;
+        padding-right: 20px;
+        border-right: 2px solid #000;
+      }
+
+      .step-text h3 {
+        font-size: 1em;
+        margin-bottom: 4px;
+      }
+
+      .step-text p {
+        font-size: 0.9em;
+        color: #444;
+        margin: 0;
+      }
+
+      /* ── Formats ─────────────────────────────── */
+      .formats-section {
+        padding: 56px 0;
+        border-bottom: 1px solid #ccc;
+      }
+
+      .formats-row {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin: 20px 0;
+      }
+
+      .fmt {
+        padding: 10px 24px;
+        border: 2px solid #000;
+        font-weight: bold;
+        font-size: 1em;
+        letter-spacing: 0.04em;
+      }
+
+      .formats-note {
+        font-size: 0.9em;
+        color: #444;
+        max-width: 560px;
+        line-height: 1.6;
+      }
+
+      /* ── Battery ─────────────────────────────── */
+      .battery-section {
+        padding: 56px 0;
+        border-bottom: 1px solid #ccc;
+      }
+
+      .battery-lead {
+        color: #444;
+        max-width: 580px;
+        margin-bottom: 28px;
+        line-height: 1.7;
+      }
+
+      .battery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 0;
+        border: 2px solid #000;
+      }
+
+      .battery-card {
+        padding: 24px;
+        border-right: 1px solid #000;
+      }
+
+      .battery-card:last-child {
+        border-right: none;
+      }
+
+      .battery-card-label {
+        font-size: 0.75em;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #888;
+        margin-bottom: 8px;
+      }
+
+      .battery-card-accent {
+        background: #f5f5f5;
+      }
+
+      .battery-card h3 {
+        font-size: 1em;
+        margin-bottom: 8px;
+      }
+
+      .battery-card p {
+        font-size: 0.88em;
+        color: #444;
+        line-height: 1.55;
+        margin: 0;
+      }
+
+      /* ── CTA ─────────────────────────────────── */
+      .cta-section {
+        padding: 60px 0;
+        border-bottom: 2px solid #000;
+        text-align: center;
+      }
+
+      .cta-section h2 {
+        border: none;
+        font-size: 1.7em;
+        margin-bottom: 12px;
+      }
+
+      .cta-section p {
+        color: #555;
+        margin-bottom: 28px;
+        font-size: 1em;
+      }
+
+      /* ── Footer ──────────────────────────────── */
+      footer {
+        padding: 28px 0;
+        font-size: 0.88em;
+        color: #666;
+      }
+
+      footer .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      footer a {
+        color: #000;
+        text-decoration: underline;
+      }
+
+      footer a:hover {
+        color: #333;
+      }
+
+      /* ── Responsive ──────────────────────────── */
+      @media (max-width: 600px) {
+        .hero h1 {
+          font-size: 1.9em;
+        }
+
+        .hero {
+          padding: 44px 0 40px;
+        }
+
+        .step-num {
+          font-size: 1.5em;
+        }
+
+        .mockup-frame {
+          max-width: 100%;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navigation -->
+    <nav class="nav">
+      <div class="container">
+        <a class="nav-brand" href="./landing.html">Inkfeed</a>
+        <div style="display: flex; gap: 10px; align-items: center">
+          <a
+            href="https://github.com/adhamsalama/inkfeed-reader"
+            style="font-size: 0.9em; color: #000; text-decoration: none"
+            >GitHub</a
+          >
+          <a href="https://reader.inkfeed.xyz" class="btn btn-sm"
+            >Open Reader</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container">
+        <p class="hero-eyebrow">Free &amp; Open Source</p>
+        <h1>An RSS reader built<br />for your Kindle.</h1>
+        <p class="hero-sub">
+          A no-frills reader for RSS and Atom feeds. Designed for e-ink
+          browsers, but functional everywhere. No signup, no tracking — just
+          your feeds, cleanly presented.
+        </p>
+        <div class="hero-actions">
+          <a href="https://reader.inkfeed.xyz" class="btn">Open the Reader</a>
+          <a
+            href="https://github.com/adhamsalama/inkfeed-reader"
+            class="btn btn-outline"
+            >View on GitHub</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- Mockup -->
+    <section class="mockup-section">
+      <div class="container">
+        <h2>What it looks like</h2>
+        <p>
+          Minimal by design. Everything is text. Works in any browser —
+          including the Kindle's experimental browser.
+        </p>
+
+        <div class="mockup-tabs">
+          <button class="mockup-tab active" onclick="showTab('tab-feed', this)">
+            Feed list
+          </button>
+          <button class="mockup-tab" onclick="showTab('tab-article', this)">
+            Article view
+          </button>
+        </div>
+
+        <!-- Feed list mockup -->
+        <div id="tab-feed" class="mockup-frame">
+          <div class="mockup-toolbar">
+            <span class="ml">Font:</span>
+            <button class="mb">A-</button>
+            <button class="mb">A+</button>
+            <span class="ml" style="margin-left: 4px">Spacing:</span>
+            <button class="mb">-</button>
+            <button class="mb">+</button>
+            <span class="ml" style="margin-left: 4px">Line:</span>
+            <button class="mb">-</button>
+            <button class="mb">+</button>
+            <button class="mb sec" style="margin-left: auto">Settings</button>
+          </div>
+          <div class="mockup-body">
+            <div class="m-feed-title">Hacker News</div>
+            <div class="m-dl-row">
+              <button class="mb">Download All (MOBI)</button>
+              <button class="mb">Download All (EPUB)</button>
+              <button class="mb">Download All (text)</button>
+            </div>
+            <div class="m-article">
+              <div class="m-title">
+                Ask HN: What's a good RSS reader for e-ink devices?
+              </div>
+              <div class="m-meta">12-03-25 &nbsp;&mdash;&nbsp; 342 points</div>
+              <div class="m-desc">
+                I have a Kindle Paperwhite and want to read feeds without a
+                heavy web interface or a subscription...
+              </div>
+            </div>
+            <div class="m-article">
+              <div class="m-title">
+                Show HN: A zero-dependency RSS reader that runs on Kindle
+              </div>
+              <div class="m-meta">11-03-25 &nbsp;&mdash;&nbsp; 215 points</div>
+              <div class="m-desc">
+                No build step, no npm. Open index.html. Works great on e-ink.
+                Download as MOBI or EPUB in one click...
+              </div>
+            </div>
+            <div class="m-article">
+              <div class="m-title">
+                The quiet pleasure of reading without notifications
+              </div>
+              <div class="m-meta">10-03-25 &nbsp;&mdash;&nbsp; 143 points</div>
+              <div class="m-desc">
+                There's something about a monochrome screen that forces you to
+                just read, without distractions...
+              </div>
+            </div>
+            <div class="m-article" style="opacity: 0.45">
+              <div class="m-title">
+                I replaced my news app with RSS and haven't looked back
+              </div>
+              <div class="m-meta">09-03-25 &nbsp;&mdash;&nbsp; 88 points</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Article view mockup -->
+        <div id="tab-article" class="mockup-frame" style="display: none">
+          <div class="mockup-toolbar">
+            <span class="ml">Font:</span>
+            <button class="mb">A-</button>
+            <button class="mb">A+</button>
+            <span class="ml" style="margin-left: 4px">Spacing:</span>
+            <button class="mb">-</button>
+            <button class="mb">+</button>
+            <span class="ml" style="margin-left: 4px">Line:</span>
+            <button class="mb">-</button>
+            <button class="mb">+</button>
+            <button class="mb sec" style="margin-left: auto">Settings</button>
+          </div>
+          <div class="mockup-body">
+            <div class="m-nav">
+              <button class="mb sec">&#8592; Back to List</button>
+              <button class="mb">Get Full Article</button>
+              <button class="mb">Download (MOBI)</button>
+              <button class="mb">Download (EPUB)</button>
+            </div>
+            <div class="m-art-title">
+              The quiet pleasure of reading without notifications
+              <div
+                style="
+                  font-weight: normal;
+                  font-size: 0.85em;
+                  color: #666;
+                  margin-top: 4px;
+                "
+              >
+                10-03-25
+              </div>
+            </div>
+            <div class="m-art-body">
+              <p>
+                There's something about a monochrome screen that forces you to
+                just read. No color gradients competing for your attention. No
+                infinite scroll. Just words on a page.
+              </p>
+              <p>
+                I bought my Kindle seven years ago and, slowly, without really
+                intending to, it became my primary reading device — not just for
+                books, but for long-form articles and newsletters I was
+                otherwise skimming in a browser tab.
+              </p>
+              <p>
+                The trick was finding a low-friction way to get arbitrary web
+                content onto it. This reader solved that...
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+      <div class="container">
+        <h2>Features</h2>
+        <div class="features-grid">
+          <div class="feature">
+            <div class="feature-glyph">&#128214;</div>
+            <h3>Clean reader view</h3>
+            <p>
+              Extracts the full article body using Mozilla Readability,
+              stripping ads and site chrome. Adjustable font, spacing, and line
+              height.
+            </p>
+          </div>
+          <div class="feature">
+            <div class="feature-glyph">&#11015;</div>
+            <h3>Download &amp; send to Kindle</h3>
+            <p>
+              Export articles as MOBI, EPUB, or plain text. Send a batch to your
+              Kindle email address with one tap.
+            </p>
+          </div>
+          <div class="feature">
+            <div class="feature-glyph">&#128190;</div>
+            <h3>Save your feeds</h3>
+            <p>
+              Feed URLs are persisted in browser local storage. No server, no
+              account, no sync — your data stays in your browser.
+            </p>
+          </div>
+          <div class="feature">
+            <div class="feature-glyph">&#128268;</div>
+            <h3>RSS 2.0 &amp; Atom</h3>
+            <p>
+              Parses both formats natively. Special handling for Reddit JSON
+              feeds and Google News redirect URLs.
+            </p>
+          </div>
+          <div class="feature">
+            <div class="feature-glyph">&#128462;</div>
+            <h3>Built for e-ink</h3>
+            <p>
+              No JavaScript frameworks, no heavy assets. Written in ES3 so it
+              runs in the Kindle's experimental browser.
+            </p>
+          </div>
+          <div class="feature">
+            <div class="feature-glyph">&#128196;</div>
+            <h3>Suggested feeds</h3>
+            <p>
+              Built-in curated list of feeds across tech, news, science,
+              culture, and more to get started without hunting for URLs.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="how-section">
+      <div class="container">
+        <h2>How to use it</h2>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-text">
+              <h3>Open the reader in any browser</h3>
+              <p>
+                Visit the reader from a desktop, phone, or Kindle browser. It's
+                a single HTML file — nothing to install.
+              </p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-text">
+              <h3>Paste a feed URL</h3>
+              <p>
+                Enter any RSS or Atom feed URL and hit Load. Or pick from the
+                built-in list of suggested feeds.
+              </p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-text">
+              <h3>Read, download, or send</h3>
+              <p>
+                Open articles in reader view, download individual files, or
+                select a batch and export the whole feed as MOBI or EPUB to your
+                Kindle.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Formats -->
+    <section class="formats-section">
+      <div class="container">
+        <h2>Export formats</h2>
+        <p style="color: #555">
+          Download a single article or an entire feed in your format of choice.
+        </p>
+        <div class="formats-row">
+          <div class="fmt">MOBI</div>
+          <div class="fmt">EPUB</div>
+          <div class="fmt">TXT</div>
+        </div>
+        <p class="formats-note">
+          Files are converted by a server and delivered straight to your device
+          or Kindle email. Add <strong>export@sender.inkfeed.xyz</strong> to
+          your Kindle's approved senders list. Prefer to keep everything local?
+          You can switch to fully in-browser mode in settings.
+        </p>
+      </div>
+    </section>
+
+    <!-- Easy on the battery -->
+    <section class="battery-section">
+      <div class="container">
+        <h2>How it works</h2>
+        <div class="battery-grid">
+          <div class="battery-card battery-card-accent">
+            <div class="battery-card-label">Default</div>
+            <h3>Server-side</h3>
+            <p>
+              Articles are fetched and converted on a server, then delivered to
+              your device or sent straight to your Kindle email address. Either
+              way, your Kindle just receives the finished file — saving battery.
+            </p>
+          </div>
+          <div class="battery-card">
+            <div class="battery-card-label">Optional</div>
+            <h3>Fully local</h3>
+            <p>
+              Everything runs in the browser via a CORS proxy. Files are
+              assembled and downloaded directly on your device. Switch to this
+              mode any time in settings.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="container">
+        <h2>Start reading.</h2>
+        <p>No signup. No install. Open it and go.</p>
+        <div
+          style="
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+          "
+        >
+          <a href="https://reader.inkfeed.xyz" class="btn">Open the Reader</a>
+          <a
+            href="https://github.com/adhamsalama/inkfeed-reader"
+            class="btn btn-outline"
+            >View Source on GitHub</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <span>Inkfeed &mdash; free &amp; open source</span>
+        <div style="display: flex; gap: 20px">
+          <a href="https://github.com/adhamsalama/inkfeed-reader">GitHub</a>
+          <a href="https://reader.inkfeed.xyz">Open Reader</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      function showTab(id, btn) {
+        document.getElementById("tab-feed").style.display = "none";
+        document.getElementById("tab-article").style.display = "none";
+        document.getElementById(id).style.display = "block";
+        var tabs = document.querySelectorAll(".mockup-tab");
+        for (var i = 0; i < tabs.length; i++)
+          tabs[i].classList.remove("active");
+        btn.classList.add("active");
+      }
+    </script>
+  </body>
+</html>
