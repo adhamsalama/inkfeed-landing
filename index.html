@@ -111,8 +111,13 @@
 
       .hero-actions {
         display: flex;
-        gap: 12px;
         flex-wrap: wrap;
+        margin-right: -12px;
+      }
+
+      .hero-actions > * {
+        margin-right: 12px;
+        margin-bottom: 8px;
       }
 
       /* ── Mockup ──────────────────────────────── */
@@ -167,9 +172,12 @@
         border-bottom: 1px solid #000;
         padding: 8px 12px;
         display: flex;
-        gap: 6px;
         align-items: center;
         flex-wrap: wrap;
+      }
+
+      .mockup-toolbar > * {
+        margin-right: 6px;
       }
 
       .mb {
@@ -208,9 +216,13 @@
 
       .m-dl-row {
         display: flex;
-        gap: 6px;
         flex-wrap: wrap;
-        margin-bottom: 14px;
+        margin-bottom: 8px;
+      }
+
+      .m-dl-row > * {
+        margin-right: 6px;
+        margin-bottom: 6px;
       }
 
       .m-article {
@@ -242,9 +254,13 @@
 
       .m-nav {
         display: flex;
-        gap: 6px;
         flex-wrap: wrap;
-        margin-bottom: 12px;
+        margin-bottom: 6px;
+      }
+
+      .m-nav > * {
+        margin-right: 6px;
+        margin-bottom: 6px;
       }
 
       .m-art-title {
@@ -274,7 +290,7 @@
       .features-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-        gap: 20px;
+        grid-gap: 20px;
       }
 
       .feature {
@@ -312,9 +328,12 @@
 
       .step {
         display: flex;
-        gap: 20px;
         align-items: flex-start;
         margin-bottom: 28px;
+      }
+
+      .step-text {
+        margin-left: 20px;
       }
 
       .step:last-child {
@@ -349,9 +368,13 @@
 
       .formats-row {
         display: flex;
-        gap: 14px;
         flex-wrap: wrap;
-        margin: 20px 0;
+        margin: 20px 0 6px;
+      }
+
+      .formats-row > * {
+        margin-right: 14px;
+        margin-bottom: 14px;
       }
 
       .fmt {
@@ -385,7 +408,6 @@
       .battery-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        gap: 0;
         border: 2px solid #000;
       }
 
@@ -453,7 +475,10 @@
         justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
-        gap: 12px;
+      }
+
+      footer .container > * {
+        margin-bottom: 12px;
       }
 
       footer a {
@@ -491,11 +516,11 @@
     <nav class="nav">
       <div class="container">
         <a class="nav-brand" href="./landing.html">Inkfeed</a>
-        <div style="display: flex; gap: 10px; align-items: center">
+        <div style="display: flex; align-items: center">
           <a
             href="https://github.com/adhamsalama/inkfeed-reader"
-            style="font-size: 0.9em; color: #000; text-decoration: none"
-            >GitHub</a
+            style="font-size: 0.9em; color: #000; text-decoration: none; margin-right: 10px"
+            >GitHub</
           >
           <a href="https://reader.inkfeed.xyz" class="btn btn-sm"
             >Open Reader</a
@@ -813,15 +838,15 @@
         <div
           style="
             display: flex;
-            gap: 12px;
             justify-content: center;
             flex-wrap: wrap;
           "
         >
-          <a href="https://reader.inkfeed.xyz" class="btn">Open the Reader</a>
+          <a href="https://reader.inkfeed.xyz" class="btn" style="margin-right: 12px; margin-bottom: 8px">Open the Reader</a>
           <a
             href="https://github.com/adhamsalama/inkfeed-reader"
             class="btn btn-outline"
+            style="margin-bottom: 8px"
             >View Source on GitHub</a
           >
         </div>
@@ -832,8 +857,8 @@
     <footer>
       <div class="container">
         <span>Inkfeed &mdash; free &amp; open source</span>
-        <div style="display: flex; gap: 20px">
-          <a href="https://github.com/adhamsalama/inkfeed-reader">GitHub</a>
+        <div style="display: flex">
+          <a href="https://github.com/adhamsalama/inkfeed-reader" style="margin-right: 20px">GitHub</a>
           <a href="https://reader.inkfeed.xyz">Open Reader</a>
         </div>
       </div>
