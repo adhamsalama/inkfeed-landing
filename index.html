@@ -200,6 +200,9 @@
       .ml {
         font-size: 0.78em;
         font-weight: bold;
+        min-width: 60px;
+        flex-shrink: 0;
+        margin-right: 6px;
       }
 
       .mockup-body {
@@ -216,13 +219,17 @@
 
       .m-dl-row {
         display: flex;
-        flex-wrap: wrap;
+        align-items: center;
         margin-bottom: 8px;
       }
 
-      .m-dl-row > * {
+      .m-dl-row button {
+        flex: 1;
         margin-right: 6px;
-        margin-bottom: 6px;
+      }
+
+      .m-dl-row button:last-child {
+        margin-right: 0;
       }
 
       .m-article {
@@ -254,13 +261,16 @@
 
       .m-nav {
         display: flex;
-        flex-wrap: wrap;
-        margin-bottom: 6px;
+        margin-bottom: 8px;
       }
 
-      .m-nav > * {
+      .m-nav button {
+        flex: 1;
         margin-right: 6px;
-        margin-bottom: 6px;
+      }
+
+      .m-nav button:last-child {
+        margin-right: 0;
       }
 
       .m-art-title {
@@ -570,24 +580,18 @@
 
         <!-- Feed list mockup -->
         <div id="tab-feed" class="mockup-frame">
-          <div class="mockup-toolbar">
-            <span class="ml">Font:</span>
-            <button class="mb">A-</button>
-            <button class="mb">A+</button>
-            <span class="ml" style="margin-left: 4px">Spacing:</span>
-            <button class="mb">-</button>
-            <button class="mb">+</button>
-            <span class="ml" style="margin-left: 4px">Line:</span>
-            <button class="mb">-</button>
-            <button class="mb">+</button>
-            <button class="mb sec" style="margin-left: auto">Settings</button>
-          </div>
           <div class="mockup-body">
-            <div class="m-feed-title">Hacker News</div>
+            <div class="m-feed-title">Hacker News <span style="font-weight: normal; color: #555">(42)</span></div>
             <div class="m-dl-row">
-              <button class="mb">Download All (MOBI)</button>
-              <button class="mb">Download All (EPUB)</button>
-              <button class="mb">Download All (text)</button>
+              <span class="ml">Download:</span>
+              <button class="mb">Text</button>
+              <button class="mb">MOBI</button>
+              <button class="mb">EPUB</button>
+            </div>
+            <div class="m-dl-row">
+              <span class="ml">Email:</span>
+              <button class="mb">MOBI</button>
+              <button class="mb">EPUB</button>
             </div>
             <div class="m-article">
               <div class="m-title">
@@ -630,25 +634,7 @@
 
         <!-- Article view mockup -->
         <div id="tab-article" class="mockup-frame" style="display: none">
-          <div class="mockup-toolbar">
-            <span class="ml">Font:</span>
-            <button class="mb">A-</button>
-            <button class="mb">A+</button>
-            <span class="ml" style="margin-left: 4px">Spacing:</span>
-            <button class="mb">-</button>
-            <button class="mb">+</button>
-            <span class="ml" style="margin-left: 4px">Line:</span>
-            <button class="mb">-</button>
-            <button class="mb">+</button>
-            <button class="mb sec" style="margin-left: auto">Settings</button>
-          </div>
           <div class="mockup-body">
-            <div class="m-nav">
-              <button class="mb sec">&#8592; Back to List</button>
-              <button class="mb">Get Full Article</button>
-              <button class="mb">Download (MOBI)</button>
-              <button class="mb">Download (EPUB)</button>
-            </div>
             <div class="m-art-title">
               The quiet pleasure of reading without notifications
               <div
@@ -661,6 +647,22 @@
               >
                 10-03-25
               </div>
+            </div>
+            <div class="m-nav">
+              <button class="mb sec">&#8592; Back</button>
+              <button class="mb">Full Article</button>
+              <button class="mb">Comments</button>
+            </div>
+            <div class="m-dl-row">
+              <span class="ml">Download:</span>
+              <button class="mb">Text</button>
+              <button class="mb">MOBI</button>
+              <button class="mb">EPUB</button>
+            </div>
+            <div class="m-dl-row">
+              <span class="ml">Email:</span>
+              <button class="mb">MOBI</button>
+              <button class="mb">EPUB</button>
             </div>
             <div class="m-art-body">
               <p>
